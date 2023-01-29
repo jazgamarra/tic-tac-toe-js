@@ -2,9 +2,12 @@
 const boxes = document.querySelectorAll(".box");
 const newGame = document.querySelector("#new-game");
 const plays = document.querySelector(".turn");
+const btnComputer = document.querySelector("#computer");
 
 // Player 1 starts the game 
-turn = 1
+let turn = 1
+let computer = false; 
+
 
 // Tic tac toe winner combos 
 const winnerCombos = [
@@ -42,13 +45,8 @@ const checkWinner = (boxesPlayer, player) => {
         }
     }
 }
-
-// Checks boxes played by each player
-const checkPlays = () => {
-    let boxesPlayer1 = [];
-    let boxesPlayer2 = [];
-
-    // Assign the boxes played by each player
+// Assign the boxes played by each player
+const playedBoxes = (boxesPlayer1, boxesPlayer2) => {
     boxes.forEach((box) => {
         if (box.getAttribute('played') != null) {
             if (box.getAttribute('played') == 1) {
@@ -60,10 +58,36 @@ const checkPlays = () => {
     });
 
     console.log('Jugadas', {boxesPlayer1}, {boxesPlayer2});
+    return boxesPlayer1.concat(boxesPlayer2);
+
+}
+// Checks boxes played by each player
+const checkPlays = () => {
+    let boxesPlayer1 = [];
+    let boxesPlayer2 = [];
+
+    // Assign the boxes played by each player
+    playedBoxes(boxesPlayer1, boxesPlayer2)
 
     // Check the winner combos 
     checkWinner(boxesPlayer1, 1);
     checkWinner(boxesPlayer2, 2);
+
+}
+
+// Computer plays
+const computerPlay = () => {
+    // Select a random not checked box 
+    let validPlay = false;
+
+    while (!validPlay) {
+        let random = Math.floor(Math.random() * 9) + 1;
+        let box = document.querySelector(`[number="${random}"]`);
+        if (box.getAttribute('played') == null) {
+            validPlay = true;
+            box.click();
+        }
+    }
 }
 
 // Onclock function that changes the color of the box 
@@ -83,14 +107,22 @@ const onClick = (event) => {
         // Turn changes
         changeTurn(); 
 
+        // Computer plays
+        if (computer && turn == 2) {
+            computerPlay();
+        }
+        
     }
     
 }
 
+
+
 // Change turn between players
 const changeTurn = () => {
     turn = (turn == 1) ? turn = 2 : turn = 1;
-    plays.innerText = `player ${turn} plays!`;
+    let text = (computer && turn==2) ? 'Computer plays!' : `Player ${turn} plays!`;
+    plays.innerHTML = text; 
 };
 
 
@@ -99,4 +131,8 @@ boxes.forEach((box) => {
     box.addEventListener('click', onClick);
 });     
 newGame.addEventListener('click', playNewGame);
-
+btnComputer.addEventListener('click', () => {
+    newGame.click(); 
+    alert('Play with the computer!'); 
+    computer = true;
+}); 

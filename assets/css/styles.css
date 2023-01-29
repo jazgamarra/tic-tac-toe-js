@@ -40,7 +40,7 @@ body {
     font-weight: bold;
     display: flex; 
     width: 120px; 
-    margin: 10px auto; 
+    margin: 10px; 
     background-color: #B05A7A;
     border: none; 
     border-radius: 5px;
@@ -49,7 +49,7 @@ body {
     font-size: 1.3em;
 }
 
-#new-game:hover {
+.button:hover {
     background-color: #579BB1;
 }
 
@@ -65,4 +65,19 @@ body {
     text-align: center;
     font-family: monospace;
     color: #FCF9BE ;
+}
+
+#new-game {
+    width: 110px;
+}
+
+#computer {
+    width: 230px;
+}
+
+.buttons {
+
+    display: flex; 
+    flex: flex-wrap; 
+    justify-content: center; 
 }
