@@ -6,6 +6,8 @@ const btnComputer = document.querySelector("#computer");
 
 // Player 1 starts the game 
 let turn = 1
+
+// Computer mode
 let computer = false; 
 
 
@@ -45,6 +47,7 @@ const checkWinner = (boxesPlayer, player) => {
         }
     }
 }
+
 // Assign the boxes played by each player
 const playedBoxes = (boxesPlayer1, boxesPlayer2) => {
     boxes.forEach((box) => {
@@ -61,6 +64,7 @@ const playedBoxes = (boxesPlayer1, boxesPlayer2) => {
     return boxesPlayer1.concat(boxesPlayer2);
 
 }
+
 // Checks boxes played by each player
 const checkPlays = () => {
     let boxesPlayer1 = [];
@@ -110,13 +114,10 @@ const onClick = (event) => {
         // Computer plays
         if (computer && turn == 2) {
             computerPlay();
-        }
-        
+        }       
     }
     
 }
-
-
 
 // Change turn between players
 const changeTurn = () => {
@@ -124,7 +125,6 @@ const changeTurn = () => {
     let text = (computer && turn==2) ? 'Computer plays!' : `Player ${turn} plays!`;
     plays.innerHTML = text; 
 };
-
 
 // Events
 boxes.forEach((box) => {
