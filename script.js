@@ -18,6 +18,15 @@ const winnerCombos = [
     ['3', '5', '7']    
 ]
 
+// New game function
+const playNewGame =  () => {
+    boxes.forEach((box) => {
+        box.classList.remove('player1');
+        box.classList.remove('player2');
+        box.removeAttribute('played');
+    });
+} 
+
 // Verifies if the player has won
 const checkWinner = (boxesPlayer, player) => {
     for (let i = 0; i < winnerCombos.length; i++) {
@@ -29,7 +38,7 @@ const checkWinner = (boxesPlayer, player) => {
         }
         if (count == 3) {
             alert(`Player ${player} has won! `);
-            break;
+            playNewGame(); 
         }
     }
 }
@@ -89,13 +98,5 @@ const changeTurn = () => {
 boxes.forEach((box) => {
     box.addEventListener('click', onClick);
 });     
-
-newGame.addEventListener('click', () => {
-    boxes.forEach((box) => {
-        box.classList.remove('player1');
-        box.classList.remove('player2');
-        box.removeAttribute('played');
-    });
-});
-
+newGame.addEventListener('click', playNewGame);
 
