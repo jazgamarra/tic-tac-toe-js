@@ -1,12 +1,21 @@
+// DOM elements 
+const boxes = document.querySelectorAll(".box");
+const newGame = document.querySelector("#new-game");
+const plays = document.querySelector(".turn");
 
-// Player 1 stats the game 
-turn = 0 
+// Player 1 starts the game 
+turn = 1
 
 // Tic tac toe winner combos 
 const winnerCombos = [
-    ['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'],
-    ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], 
-    ['0', '4', '8'], ['2', '4', '6']            
+    ['1', '2', '3'],  
+    ['4', '5', '6'], 
+    ['7', '8', '9'],
+    ['1', '4', '7'],
+    ['2', '5', '8'],
+    ['3', '6', '9'],
+    ['1', '5', '9'],
+    ['3', '5', '7']    
 ]
 
 // Verifies if the player has won
@@ -19,13 +28,11 @@ const checkWinner = (boxesPlayer, player) => {
             }
         }
         if (count == 3) {
-            alert(`Ganó el jugador ${player}`);
+            alert(`Player ${player} has won! `);
             break;
         }
     }
 }
-
-
 
 // Checks boxes played by each player
 const checkPlays = () => {
@@ -35,7 +42,7 @@ const checkPlays = () => {
     // Assign the boxes played by each player
     boxes.forEach((box) => {
         if (box.getAttribute('played') != null) {
-            if (box.getAttribute('played') == 0) {
+            if (box.getAttribute('played') == 1) {
                 boxesPlayer1.push(box.getAttribute('number'));
             } else {
                 boxesPlayer2.push(box.getAttribute('number'));
@@ -54,7 +61,7 @@ const checkPlays = () => {
 const onClick = (event) => {
     if (event.target.getAttribute('played') == null) {
         // The color changes depending on the turn
-        color = (turn == 0 ) ? "player1" : "player2";
+        color = (turn == 1 ) ? "player1" : "player2";
 
         // Box changes color and is marked as played
         box = event.target;
@@ -65,16 +72,30 @@ const onClick = (event) => {
         checkPlays(); 
 
         // Turn changes
-        turn = (turn == 0) ? turn = 1 : turn = 0; 
+        changeTurn(); 
 
     }
     
 }
 
-// Seleccionar los elementos del DOM
-boxes = document.querySelectorAll(".box");
+// Change turn between players
+const changeTurn = () => {
+    turn = (turn == 1) ? turn = 2 : turn = 1;
+    plays.innerText = `player ${turn} plays!`;
+};
 
-// Agregar el evento click a cada caja
+
+// Events
 boxes.forEach((box) => {
     box.addEventListener('click', onClick);
 });     
+
+newGame.addEventListener('click', () => {
+    boxes.forEach((box) => {
+        box.classList.remove('player1');
+        box.classList.remove('player2');
+        box.removeAttribute('played');
+    });
+});
+
+

@@ -1,5 +1,4 @@
 body {
-    
     background-color: #B7C4CF; 
 }
 
@@ -37,20 +36,33 @@ body {
     background: #B08BBB;
 }
 
-.player-color {
-    width: 100px;
-    border-radius: 10px; 
-    margin: 10px;
+.button {
+    font-weight: bold;
+    display: flex; 
+    width: 120px; 
+    margin: 10px auto; 
+    background-color: #B05A7A;
+    border: none; 
+    border-radius: 5px;
     padding: 5px;
-    text-align: center;
-    font-family: monospace;
-    font-size: 1.2em;
-    color: #FCF9BE ;
+    padding-left: 15px;
+    font-size: 1.3em;
 }
 
-.players-section {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px auto;
-    width: 250px;
+#new-game:hover {
+    background-color: #579BB1;
+}
+
+.turn {
+    background-color: #B05A7A;
+    width: 200px;
+    border-radius: 50px;
+    margin: 10px auto;
+    padding: 3px;
+}
+
+.font {
+    text-align: center;
+    font-family: monospace;
+    color: #FCF9BE ;
 }
